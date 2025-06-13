@@ -8,8 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { Linking } from 'react-native';
 
-const BACKEND_URL = 'http://192.168.0.110:3000';
-
+const BACKEND_URL = 'https://pm-arena-backend-production.up.railway.app';
 export default function CurrentTournament() {
   const { userInfo } = useContext(UserContext);
   const [tournament, setTournament] = useState(null);
@@ -280,8 +279,8 @@ const openLobbyPubg = () => {
           <Text style={styles.infoBold2}>{tournament.seat}</Text>
           
         </Text>
-        <TouchableOpacity onPress={openLobby} style={styles.animatedButtonWrapper}>
-  <Animated.Text style={[styles.animatedButtonText, { color: interpolatedColor }]}>
+        <TouchableOpacity onPress={openLobby} style={[styles.animatedButtonWrapper,{borderColor: interpolatedColor}]}>
+  <Animated.Text style={[styles.animatedButtonText, { color: interpolatedColor}]}>
     Посмотреть мой слот
   </Animated.Text>
 </TouchableOpacity>
@@ -358,7 +357,7 @@ const styles = StyleSheet.create({
   paddingHorizontal: 16,
   borderRadius: 6,
   borderWidth:1.6,
-  borderColor:'#777',
+
   alignItems: 'center',
   justifyContent: 'center',
   marginTop: 12,
@@ -415,7 +414,7 @@ animatedButtonText: {
   },
   title: {
     fontSize: 20,
-    marginTop:6,
+    marginTop:16,
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 8,

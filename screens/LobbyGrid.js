@@ -133,8 +133,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 2,
-    paddingVertical: 4,
+   
   },
   slotNumber: {
     color: '#555',

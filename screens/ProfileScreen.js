@@ -24,7 +24,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '../UserContext';
 import profileImage from '../jpg/profile.png';
 
-const BACKEND_URL = 'http://192.168.0.110:3000';
+const BACKEND_URL = 'https://pm-arena-backend-production.up.railway.app';
 const MANAGER_WHATSAPP = 'https://wa.me/996507535771'; // ВАШ номер менеджера в формате https://wa.me/номер_без_знаков
 
 export default function Profile({ openAdminPanel }) {

@@ -12,7 +12,7 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import { UserContext } from '../UserContext';
 
-const BACKEND_URL = 'http://192.168.0.110:3000';
+const BACKEND_URL = 'https://pm-arena-backend-production.up.railway.app';
 
 export default function Tournaments({ navigation }) {
   const { userInfo } = useContext(UserContext);

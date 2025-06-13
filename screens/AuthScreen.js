@@ -13,7 +13,8 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '../UserContext';
 
-const BACKEND_URL = 'http://192.168.0.110:3000';
+const BACKEND_URL = 'https://pm-arena-backend-production.up.railway.app';
+
 
 export default function AuthScreen() {
   const { setUserInfo } = useContext(UserContext);

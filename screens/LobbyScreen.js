@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import LobbyGrid from './LobbyGrid';
 
-const BACKEND_URL = 'http://192.168.0.110:3000';
+const BACKEND_URL = 'https://pm-arena-backend-production.up.railway.app';
 
 const LobbyScreen = ({ route }) => {
   const [players, setPlayers] = useState([]);

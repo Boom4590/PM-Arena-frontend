@@ -1,5 +1,8 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+
 
 import { enableScreens } from 'react-native-screens';
 enableScreens(true);
@@ -107,7 +110,7 @@ function MainApp() {
       <Stack.Navigator
         screenOptions={({ navigation }) => ({
           animation: 'slide_from_bottom',
-          animationDuration: 300,
+          animationDuration: 200,
           headerRight: () => <HeaderRight navigation={navigation} />,
           headerStyle: {
             backgroundColor: '#fff',
@@ -167,8 +170,10 @@ const styles = StyleSheet.create({
 
 export default function App() {
   return (
-    <UserProvider>
-      <MainApp />
-    </UserProvider>
+    <SafeAreaProvider>
+      <UserProvider>
+        <MainApp />
+      </UserProvider>
+    </SafeAreaProvider>
   );
 }
