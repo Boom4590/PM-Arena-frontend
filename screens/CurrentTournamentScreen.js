@@ -200,25 +200,35 @@ export default function CurrentTournament() {
   }, [startTime]);
 
   useEffect(() => {
-    if (!userInfo || !userInfo.pubg_id) {
-      setTournament(null);
-      setLobbyVisible(false);
-      setTimeLeft(null);
-      setLobbyCountdown(null);
-      clearTimers();
-      clearLobbyTimer();
-      return;
-    }
+  if (!userInfo || !userInfo.pubg_id) {
+    setTournament(null);
+    setLobbyVisible(false);
+    setTimeLeft(null);
+    setLobbyCountdown(null);
+    clearTimers();
+    clearLobbyTimer();
+    return;
+  }
 
+  fetchCurrentTournament(); // сразу при монтировании
+
+  // Периодический опрос
+  pollingRef.current = setInterval(fetchCurrentTournament, 20000);
+
+  // Подписка на фокус экрана — обновляем данные при переключении на экран
+  const unsubscribe = navigation.addListener('focus', () => {
     fetchCurrentTournament();
-    pollingRef.current = setInterval(fetchCurrentTournament, 20000);
+  });
 
-    return () => {
-      clearTimers();
-      clearLobbyTimer();
-      if (pollingRef.current) clearInterval(pollingRef.current);
-    };
-  }, [userInfo]);
+  // Очистка подписок и таймеров при размонтировании
+  return () => {
+    clearTimers();
+    clearLobbyTimer();
+    if (pollingRef.current) clearInterval(pollingRef.current);
+    unsubscribe(); // отписка от события focus
+  };
+}, [userInfo, navigation]);
+
 
   const openLobby = () => {
     navigation.navigate('Lobby', {
@@ -323,7 +333,7 @@ const openLobbyPubg = () => {
           </View>
 
           <TouchableOpacity style={styles.enterLobbyButton} onPress={openLobbyPubg}>
-            <Text style={styles.enterLobbyButtonText}>Открыть Pubg Mobile🎮</Text>
+            <Text style={styles.enterLobbyButtonText}>Открыть Pubg Mobile</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -357,7 +367,7 @@ const styles = StyleSheet.create({
   paddingHorizontal: 16,
   borderRadius: 6,
   borderWidth:1.6,
-
+borderColor:'blue',
   alignItems: 'center',
   justifyContent: 'center',
   marginTop: 12,
@@ -403,7 +413,7 @@ animatedButtonText: {
     height: 69,
     borderRadius:50,
     position:'absolute',
-   left:25,
+   left:30,
    marginTop:10
     
   },
@@ -446,9 +456,15 @@ animatedButtonText: {
     padding: 12,
     borderRadius: 12,
     marginBottom: 16,
+shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
+    // Для Android
+    elevation: 3,
   
-    elevation: 2,
+    
   },
   infoText: {
     fontSize: 12,
@@ -472,6 +488,13 @@ animatedButtonText: {
     borderRadius: 12,
     elevation: 2,
     marginBottom: 40,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    // Для Android
+    elevation: 5,
   },
   lobbyTitle: {
     fontSize: 14,

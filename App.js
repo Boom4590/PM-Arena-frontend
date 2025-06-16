@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext , useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -98,16 +99,38 @@ function TabScreens({ navigation }) {
   );
 }
 
+
+
 function MainApp() {
   const { userInfo } = useContext(UserContext);
+  const [initialScreen, setInitialScreen] = useState(null);
+
+  useEffect(() => {
+    const checkFirstLogin = async () => {
+      if (userInfo === null) return;
+
+      const wasShown = await AsyncStorage.getItem('instructionShown');
+      if (wasShown !== 'true') {
+        await AsyncStorage.setItem('instructionShown', 'true');
+        setInitialScreen('Instruction');
+      } else {
+        setInitialScreen('Main');
+      }
+    };
+
+    checkFirstLogin();
+  }, [userInfo]);
 
   if (userInfo === null) {
     return <AuthScreen />;
   }
 
+  if (!initialScreen) return null; // Loading
+
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName={initialScreen}
         screenOptions={({ navigation }) => ({
           animation: 'slide_from_bottom',
           animationDuration: 200,
@@ -126,19 +149,16 @@ function MainApp() {
           },
         })}
       >
-        <Stack.Screen
-          name="Main"
-          component={TabScreens}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Admin" component={AdminPanel} options={{ title: 'Админ-панель' }} initialParams={{ user: userInfo }} />
+        <Stack.Screen name="Main" component={TabScreens} options={{ headerShown: false }} />
         <Stack.Screen name="Instruction" component={InstructionScreen} options={{ title: 'Правила' }} />
+        <Stack.Screen name="Admin" component={AdminPanel} options={{ title: 'Админ-панель' }} initialParams={{ user: userInfo }} />
         <Stack.Screen name="CryptoPayment" component={CryptoPaymentScreen} options={{ title: 'Оплата' }} />
         <Stack.Screen name="Lobby" component={LobbyScreen} options={{ title: 'Лобби' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
 
 const styles = StyleSheet.create({
   accentColor: {

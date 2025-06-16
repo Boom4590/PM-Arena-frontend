@@ -5,24 +5,40 @@ export const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Загрузка user из AsyncStorage при старте
   useEffect(() => {
     async function loadUser() {
-      const savedUser = await AsyncStorage.getItem('userInfo');
-      if (savedUser) setUserInfo(JSON.parse(savedUser));
+      try {
+        const savedUser = await AsyncStorage.getItem('userInfo');
+        if (savedUser) setUserInfo(JSON.parse(savedUser));
+      } catch (e) {
+        console.log('Ошибка загрузки userInfo:', e);
+      } finally {
+        setLoading(false);
+      }
     }
     loadUser();
   }, []);
 
-  // Сохраняем user в AsyncStorage при изменении
   useEffect(() => {
-    if (userInfo) {
-      AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-    } else {
-      AsyncStorage.removeItem('userInfo');
+    async function saveUser() {
+      try {
+        if (userInfo) {
+          await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+        } else {
+          await AsyncStorage.removeItem('userInfo');
+        }
+      } catch (e) {
+        console.log('Ошибка сохранения userInfo:', e);
+      }
     }
+    saveUser();
   }, [userInfo]);
+
+  if (loading) {
+    return null; // или спиннер, или заглушка загрузки
+  }
 
   return (
     <UserContext.Provider value={{ userInfo, setUserInfo }}>
@@ -30,4 +46,3 @@ export function UserProvider({ children }) {
     </UserContext.Provider>
   );
 }
-

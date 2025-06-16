@@ -1,15 +1,24 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
+import { useNavigation } from '@react-navigation/native';
 export default function InstructionScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
       <Image source={require('../jpg/chiken.jpg')} style={styles.topImage} />
 
       <Text style={styles.title}>📌 Правила участия в турнире</Text>
+
+      {/* Rewards Section - NOW FIRST */}
+      <View style={[styles.section, styles.sectionGold]}>
+        <Text style={styles.sectionTitle}>🏆 Награды и правила получения:</Text>
+        <Text style={styles.text}>• Деньги отправляются победителям в течение <Text style={styles.bold}>6–12 часов</Text> после проверки на читы и честную игру.</Text>
+        <Text style={styles.text}>• Победителю будет написано на <Text style={styles.bold}>WhatsApp</Text> по номеру, с которым он проходил регистрацию.</Text>
+        <Text style={styles.text}>• Если номер недоступен или был указан неверно — <Text style={styles.bold}>игрок обязан сам</Text> написать менеджеру и подтвердить, что аккаунт принадлежит ему.</Text>
+        <Text style={[styles.text, styles.red]}>• Если игрок попал в лобби без оплаты (по чужому ID/паролю) и победил — <Text style={styles.bold}>награда не выдаётся</Text>, и он <Text style={styles.bold}>получает пожизненный бан</Text>.</Text>
+      </View>
 
       {/* Section 1 */}
       <View style={[styles.section, styles.sectionRed]}>
@@ -44,20 +53,13 @@ export default function InstructionScreen() {
         <Text style={styles.text}>• При подтверждении причины — билет вернётся</Text>
       </View>
 
-      {/* Section 5 */}
-      <View style={[styles.section, styles.sectionGray]}>
-        <Text style={styles.sectionTitle}>5. Награды:</Text>
-        <Text style={styles.text}>• ТОП-10 получают приз</Text>
-        <Text style={styles.text}>• Менеджер сам свяжется с вами через WhatsApp по номеру регистрации</Text>
-      </View>
-
-      {/* Images with geometric frames */}
+      {/* Images */}
       <View style={styles.imageRow}>
         <View style={styles.imageWrapper}>
-          <Image source={require('../jpg/profile.png')} style={styles.image} />
+          <Image source={require('../jpg/image1.jpg')} style={styles.image} />
         </View>
         <View style={styles.imageWrapper}>
-          <Image source={require('../jpg/profile.png')} style={styles.image} />
+          <Image source={require('../jpg/image2.jpeg')} style={styles.image} />
         </View>
       </View>
 
@@ -69,19 +71,20 @@ export default function InstructionScreen() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f0f0', // изменено с белого на мягкий светло-серый
     paddingHorizontal: 20,
-    // paddingTop: 30, // Убираем верхний паддинг, чтобы картинка была у самого верха
     flex: 1,
   },
   topImage: {
     width: '100%',
-    height: 100,
+    height: 170,
     resizeMode: 'cover',
-    borderRadius: 0,
-    marginBottom: 0,
+    borderRadius: 12,
+    marginTop: 10,
+    marginBottom: 10,
   },
   title: {
     fontSize: 26,
@@ -93,23 +96,29 @@ const styles = StyleSheet.create({
   },
   section: {
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 14,
     marginBottom: 18,
-    borderLeftWidth: 8,
+    borderLeftWidth: 6,
     shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
-    backgroundColor: '#fafafa',
+    backgroundColor: '#fff', // секции остаются белыми для контраста
+    elevation: 2,
   },
   sectionRed: {
     borderLeftColor: '#d32f2f',
-    backgroundColor: '#ffe6e6',
+    backgroundColor: '#fff5f5',
   },
   sectionGray: {
     borderLeftColor: '#999',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#f9f9f9',
   },
+  sectionGold: {
+    borderLeftColor: '#DAA520',
+    backgroundColor: '#fffaf0',
+  },
+  // остальное без изменений...
   sectionTitle: {
     fontSize: 18,
     fontWeight: '700',
@@ -123,6 +132,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#444',
     marginVertical: 4,
+  },
+  bold: {
+    fontWeight: 'bold',
+    color: '#000',
   },
   red: {
     color: '#d32f2f',

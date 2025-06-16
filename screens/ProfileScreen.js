@@ -7,7 +7,6 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 
-
 import {
   View,
   Text,
@@ -44,9 +43,11 @@ export default function Profile({ openAdminPanel }) {
     }, [userInfo?.pubg_id])
   );
 
-  const logout = async () => {
-    setUserInfo(null);
-  };
+ const logout = async () => {
+ 
+  setUserInfo(null);
+};
+
 
   async function fetchLatestUserData() {
     try {

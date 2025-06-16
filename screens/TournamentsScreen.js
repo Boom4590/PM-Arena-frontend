@@ -119,7 +119,7 @@ export default function Tournaments({ navigation }) {
         <Text style={styles.cardDetail}>💵 Вход билет: <Text style={styles.bold}>{item.entry_fee} $</Text></Text>
         <Text style={styles.cardDetail}>🏆 Приз. фонд: <Text style={styles.bold}>{item.prize_pool} $</Text></Text>
         <Text style={styles.cardDetail}>🕒 Дата Старт: <Text style={styles.muted}>{startTimeStr}</Text></Text>
-        <Text style={styles.cardDetail}>👥 Участников: {item.participants_count || 0}/100</Text>
+        <Text style={styles.cardDetail}>👥 Участников: <Text style={styles.bold}>{item.participants_count || 0}</Text>/100</Text>
 
         <TouchableOpacity
           disabled={item.isFake || disabled}
@@ -208,13 +208,13 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   cardTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '600',
     color: '#111827',
     marginBottom: 6,
   },
   cardDetail: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#374151',
     marginBottom: 2,
   },
