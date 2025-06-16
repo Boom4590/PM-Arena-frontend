@@ -21,7 +21,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '../UserContext';
-import profileImage from '../jpg/profile.png';
+import profileImage from '../assets/profile.png';
 
 const BACKEND_URL = 'https://pm-arena-backend-production.up.railway.app';
 const MANAGER_WHATSAPP = 'https://wa.me/996507535771'; // ВАШ номер менеджера в формате https://wa.me/номер_без_знаков
@@ -169,7 +169,7 @@ export default function Profile({ openAdminPanel }) {
    
     <Text style={styles.cryptoText}>Пополнить криптой</Text>
      <Image
-      source={require('../jpg/bitcoin.png')} // Убедитесь, что иконка биткоина есть в этом пути
+      source={require('../assets/btc.png')} // Убедитесь, что иконка биткоина есть в этом пути
       style={styles.cryptoIcon}
     />
   </View>
@@ -188,7 +188,7 @@ export default function Profile({ openAdminPanel }) {
   <View style={styles.managerContent}>
     <Text style={styles.managerBtnText}>Оплатить через менеджера</Text>
     <Image
-      source={require('../jpg/whatsapp.svg')} // убедись, что файл есть по этому пути
+      source={require('../assets/whatsapp.png')} // убедись, что файл есть по этому пути
       style={styles.whatsappIcon}
     />
   </View>
@@ -400,6 +400,7 @@ promoLeft: {
   whatsappIcon: {
     width: 20,
     height: 20,
+    marginTop:2
   },
   promoToggle: {
     marginTop: 30,

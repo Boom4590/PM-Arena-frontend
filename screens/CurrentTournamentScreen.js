@@ -310,7 +310,7 @@ const openLobbyPubg = () => {
          
   <View style={styles.lobbyHeader}>
       <Image
-        source={require('../jpg/pubger.png')}
+        source={require('../assets/pubger.png')}
         style={styles.lobbyIcon}
         resizeMode="contain"
       />

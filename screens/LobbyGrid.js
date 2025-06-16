@@ -8,7 +8,7 @@ const marginPerItem = 2;
 const totalSpacing = marginPerItem * 2 * numColumns + horizontalPadding;
 const itemSize = (screenWidth - totalSpacing) / numColumns;
 
-const slotImage = require('../jpg/slotImage.png');
+const slotImage = require('../assets/slotImage.png');
 
 const LobbyGrid = ({ players, currentUserId }) => {
   const data = Array.from({ length: 100 }, (_, i) => {

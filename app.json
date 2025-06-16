@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "b353e94f-4d3b-4ec4-aad5-f95afb159a43"
+      }
+    },
+    "android": {
+      "package": "com.nurbolot4444.mobile"
+    }
+  }
+}

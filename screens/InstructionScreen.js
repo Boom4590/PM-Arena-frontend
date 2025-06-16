@@ -7,7 +7,7 @@ export default function InstructionScreen() {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
-      <Image source={require('../jpg/chiken.jpg')} style={styles.topImage} />
+      <Image source={require('../assets/chiken.jpg')} style={styles.topImage} />
 
       <Text style={styles.title}>📌 Правила участия в турнире</Text>
 
@@ -56,10 +56,10 @@ export default function InstructionScreen() {
       {/* Images */}
       <View style={styles.imageRow}>
         <View style={styles.imageWrapper}>
-          <Image source={require('../jpg/image1.jpg')} style={styles.image} />
+          <Image source={require('../assets/image1.jpg')} style={styles.image} />
         </View>
         <View style={styles.imageWrapper}>
-          <Image source={require('../jpg/image2.jpeg')} style={styles.image} />
+          <Image source={require('../assets/image2.jpeg')} style={styles.image} />
         </View>
       </View>
 
