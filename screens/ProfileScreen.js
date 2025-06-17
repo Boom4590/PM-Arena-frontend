@@ -82,6 +82,28 @@ export default function Profile({ openAdminPanel }) {
       Alert.alert('Ошибка', 'Не удалось открыть WhatsApp');
     }
   };
+const confirmLogout = () => {
+  
+  Alert.alert(
+    'Подтверждение',
+    'Вы действительно хотите выйти?',
+    [
+      {
+        text: 'Отмена',
+        style: 'cancel',
+      },
+      {
+        text: 'Выйти',
+        style: 'destructive',
+        onPress: () => {
+          logout();
+        },
+      },
+    ],
+    { cancelable: true }
+  );
+  
+};
 
   const handlePay = async () => {
     if (!amountUsd) {
@@ -228,7 +250,7 @@ export default function Profile({ openAdminPanel }) {
       <Text style={styles.promoText}>Промокод</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={logout}>
+    <TouchableOpacity onPress={logout} /*onPress={confirmLogout}*/ >
       <Text style={styles.logoutText}>Выйти</Text>
     </TouchableOpacity>
   </View>
@@ -297,8 +319,8 @@ promoLeft: {
   },
   balanceRow: {
     borderRadius: 6,
-    borderWidth: 2,
-    borderColor: '#444',
+    borderWidth: 1.5,
+    borderColor: '#777',
     width: '60%',
     padding: 10,
     justifyContent:'space-between',
